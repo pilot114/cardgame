@@ -1,5 +1,7 @@
 <?php
 
+namespace Cardgame\Cards;
+
 class Collection
 {
   private $cards;

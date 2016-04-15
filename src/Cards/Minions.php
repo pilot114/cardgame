@@ -1,5 +1,7 @@
 <?php
 
+namespace Cardgame\Cards;
+
 class Minions extends Collection
 {
 

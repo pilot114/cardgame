@@ -1,0 +1,9 @@
+{
+    "require": {
+        "cboden/ratchet": "^0.3.4",
+        "ratchet/pawl": "^0.2.1"
+    },
+    "autoload": {
+        "psr-4": {"Cardgame\\": "src"}
+    }
+}
