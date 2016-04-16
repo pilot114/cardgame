@@ -4,7 +4,7 @@ namespace Cardgame\Cards;
 
 class Minions extends Collection
 {
-  private $targetPosition = 0;
+  private $targetPosition = 1;
 
   function __construct()
   {
@@ -13,5 +13,10 @@ class Minions extends Collection
   public function setTargetPosition($index)
   {
     $this->targetPosition = $index;
+  }
+
+  public function getByIndex($index)
+  {
+
   }
 }

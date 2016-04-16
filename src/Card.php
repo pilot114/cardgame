@@ -34,4 +34,20 @@ class Card
     $this->effects = isset($doc['ef']) ? $doc['ef']:null;
     $this->callback = isset($doc['cb']) ? $doc['cb']:null;
   }
+
+  public function getInfo()
+  {
+    return [
+      'nm' => $this->name,
+      'cs' => $this->cost,
+      'at' => $this->attack,
+      'hp' => $this->health,
+    ];
+  }
+
+  public function play($game)
+  {
+    $cb = $this->callback;
+    return $cb($game);
+  }
 }

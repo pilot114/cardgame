@@ -8,19 +8,37 @@ use Cardgame\Cards\Minions;
 use Cardgame\Cards\Gone;
 
 use Cardgame\Exceptions\ClientException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\Event;
 
 class Game
 {
   private $top = [];
   private $bottom = [];
-  private $debug;
   private $fs; // friendlySide
   private $es; // enemySide
-  private $isStart = false;
+  private $debug = false;
   private $result = [];
+
+  private $ed; // eventDispatcher
 
   function __construct($createMsg, $debug)
   {
+    $this->debug = $debug;
+    $this->ed = new EventDispatcher();
+
+    // example
+    $this->ed->addListener('game.start', function (Event $event) {
+      echo 'event!';
+    });
+    $this->ed->dispatch('game.start');
+    $ls = $this->ed->getListeners('game.start');
+    foreach ($ls as $listener) {
+      $this->ed->removeListener('game.start', $listener);
+    }
+    $this->ed->dispatch('game.start');
+
+
     list($heroA, $heroB) = array_keys($createMsg);
     $deckA = $createMsg[$heroA];
     $deckB = $createMsg[$heroB];
@@ -45,11 +63,19 @@ class Game
       'minions' => new Minions(),
       'gone' => new Gone(),
     ];
-    $this->debug = $debug;
 
-    // TODO: random select side
-    $this->fs = $this->top;
-    $this->es = $this->bottom;
+    // select side
+    if (mt_rand(0,1)) {
+      $this->fs = $this->bottom;
+      $this->es = $this->top;
+    } else {
+      $this->fs = $this->top;
+      $this->es = $this->bottom;
+    }
+
+    // TODO: mulligan and coin
+    $this->fs['hand']->pushCard( $this->fs['deck']->pullCardRand(3) );
+    $this->es['hand']->pushCard( $this->es['deck']->pullCardRand(3) );
   }
 
   private function switchSide()
@@ -59,6 +85,8 @@ class Game
 
   public function command($command)
   {
+    $this->result = [];
+
     // power
     if( isset($command['power']) ) {
       if ($this->fs['hero']->isPowerRequireTarget()) {
@@ -73,6 +101,9 @@ class Game
 
     // play card
     if( isset($command['hand']) ) {
+      $target = $this->getTarget($command);
+      $card = $this->fs['hand']->get($command['hand']);
+      $this->result[] = $card->play($this, $target);
     }
 
     // end turn
@@ -114,6 +145,7 @@ class Game
       return $this->fs['minions']->setTargetPosition($command['position']);
     }
 
-    throw new ClientException("Not found target for command:" . json_encode($command));
+    // null target
+    return null;
   }
 }

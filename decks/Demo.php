@@ -11,7 +11,7 @@ return [
     'rr' => 'common',
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '2',
@@ -21,7 +21,7 @@ return [
     'rr' => 'basic',
     'im' => false,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '3',
@@ -31,7 +31,7 @@ return [
     'rr' => 'basic',
     'im' => false,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '4',
@@ -41,7 +41,7 @@ return [
     'rr' => 'basic',
     'im' => false,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '5',
@@ -51,7 +51,7 @@ return [
     'rr' => 'basic',
     'im' => false,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '6',
@@ -61,7 +61,7 @@ return [
     'rr' => 'basic',
     'im' => false,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '7',
@@ -74,7 +74,9 @@ return [
     'rs' => ['beast'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){
+      return 'tenetnick win!!!';
+    }
   ],
   [
     'id' => '8',
@@ -85,7 +87,7 @@ return [
     'rs' => ['secret'],
     'im' => false,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '9',
@@ -98,7 +100,7 @@ return [
     'rs' => ['beast'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '10',
@@ -108,7 +110,7 @@ return [
     'rr' => 'common',
     'im' => false,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '11',
@@ -119,7 +121,7 @@ return [
     'rr' => 'rare',
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '12',
@@ -131,7 +133,7 @@ return [
     'rs' => ['murloc'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '13',
@@ -143,7 +145,7 @@ return [
     'ef' => ['taunt'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '14',
@@ -155,7 +157,7 @@ return [
     'ef' => ['taunt', 'shield'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '15',
@@ -168,7 +170,7 @@ return [
     'ef' => ['charge'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '16',
@@ -180,7 +182,7 @@ return [
     'ef' => ['taunt'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '17',
@@ -192,7 +194,7 @@ return [
     'rs' => ['beast'],
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '18',
@@ -203,7 +205,7 @@ return [
     'rr' => 'basic',
     'im' => true,
     'ih' => false,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '19',
@@ -215,7 +217,7 @@ return [
     'rs' => ['dragon'],
     'im' => true,
     'ih' => true,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
   [
     'id' => '20',
@@ -227,6 +229,6 @@ return [
     'rs' => ['taunt'],
     'im' => true,
     'ih' => true,
-    'cb' => function(){}
+    'cb' => function($game){ return 'cb!!!'; }
   ],
 ];

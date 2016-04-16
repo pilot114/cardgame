@@ -15,6 +15,6 @@ class Hunter extends Hero
 
   public function power($target = null)
   {
-
+    return 'hunter power';
   }
 }

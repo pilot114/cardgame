@@ -14,4 +14,14 @@ class Deck extends Collection
       }
     }
   }
+
+  public function pullCardRand($count)
+  {
+    $pull = [];
+    for ($i=0; $i<$count; $i++) {
+      shuffle($this->cards);
+      $pull[] = array_pop($this->cards);
+    }
+    return $pull;
+  }
 }

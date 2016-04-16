@@ -25,6 +25,10 @@ $scenario = [
   ['hand' => 1, 'eMinion' => 1],
   ['end' => true],
   //2
+  ['hand' => 2, 'position' => 1],
+  ['end' => true],
+  ['power' => true, 'eMinion' => 1],
+  ['end' => true],
 ];
 // loop
 $wc = new WsClient(['Hunter' => $deckA, 'Mage' => $deckB], $scenario);

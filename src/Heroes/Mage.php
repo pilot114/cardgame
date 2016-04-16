@@ -15,6 +15,6 @@ class Mage extends Hero
 
   public function power($target = null)
   {
-
+    return 'mage power';
   }
 }
