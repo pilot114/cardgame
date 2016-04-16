@@ -12,16 +12,16 @@ class WsClient
     $conn('ws://127.0.0.1:8080')
       ->then(function(Ratchet\Client\WebSocket $conn) use ($decks, $scenario) {
           // setup
-          $conn->send(base64_encode(serialize($decks)));
+          $conn->send(json_encode($decks));
 
           // scenario
           foreach ($scenario as $command) {
-            $send = base64_encode(serialize($command));
+            $send = json_encode($command);
             $conn->send($send);
           }
 
           $conn->on('message', function($msg) use ($conn) {
-            echo $msg;
+            echo $msg . "\n";
           });
           $conn->on('close', function($code, $reason) {
             echo "Connect close. Code: $code, Reason: $reason\n";

@@ -21,7 +21,7 @@ class Connection implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-      $msg = unserialize(base64_decode($msg));
+      $msg = json_decode($msg, true);
 
       if ($this->game) {
         $result = $this->game->command($msg);
@@ -32,7 +32,7 @@ class Connection implements MessageComponentInterface {
 
       // send result to ALL clients
       foreach ($this->clients as $client) {
-        $client->send($result);
+        $client->send(json_encode($result));
       }
     }
 

@@ -4,9 +4,14 @@ namespace Cardgame\Cards;
 
 class Minions extends Collection
 {
+  private $targetPosition = 0;
 
-  function __construct(argument)
+  function __construct()
   {
-    # code...
+  }
+
+  public function setTargetPosition($index)
+  {
+    $this->targetPosition = $index;
   }
 }

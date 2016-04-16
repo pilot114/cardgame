@@ -6,8 +6,7 @@ namespace Cardgame\Cards;
 class Hand extends Collection
 {
 
-  function __construct(argument)
+  function __construct()
   {
-    # code...
   }
 }

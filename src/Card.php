@@ -14,8 +14,8 @@ class Card
   private $class;
   private $rarity;
   private $roles = [];
-  public bool $isMinion;
-  public bool $isHidden;
+  public $isMinion;
+  public $isHidden;
 
   private $effects = [];
   private $callback;

@@ -2,11 +2,16 @@
 
 namespace Cardgame\Cards;
 
+use Cardgame\Card;
+
 class Deck extends Collection
 {
-
-  function __construct(argument)
+  function __construct($cardIndexes, $pack)
   {
-    # code...
+    foreach ($pack as $card) {
+      if ( in_array($card['id'], $cardIndexes) ) {
+        $this->cards[] = new Card($card);
+      }
+    }
   }
 }
