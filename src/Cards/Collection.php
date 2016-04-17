@@ -2,23 +2,14 @@
 
 namespace Cardgame\Cards;
 
-class Collection
+class Collection implements Iterator
 {
   protected $cards;
+  protected $position = 0;
 
   function __construct(array $cards)
   {
     $this->cards = $cards;
-  }
-
-  public function get($index)
-  {
-    return $this->cards[$index];
-  }
-
-  public function set(Card $card)
-  {
-    $this->cards[] = $card;
   }
 
   public function select($selector = null)
@@ -30,12 +21,30 @@ class Collection
     }
   }
 
-  public function getInfo()
+  public function export()
   {
     $info = [];
     foreach ($this->cards as $card) {
-      $info[] = $card->getInfo();
+      $info[] = $card->export();
     }
     return $info;
+  }
+
+
+  // Iterator
+  function rewind() {
+    $this->position = 0;
+  }
+  function current() {
+    return $cards[$this->position];
+  }
+  function key() {
+    return $this->position;
+  }
+  function next() {
+    ++$this->position;
+  }
+  function valid() {
+    return isset($cards[$this->position]);
   }
 }

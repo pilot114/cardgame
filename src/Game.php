@@ -13,12 +13,14 @@ use Symfony\Component\EventDispatcher\Event;
 
 class Game
 {
+  private $cardSet;
   private $top = [];
   private $bottom = [];
   private $fs; // friendlySide
   private $es; // enemySide
   private $debug = false;
-  private $result = [];
+
+  public $result = [];
 
   private $ed; // eventDispatcher
 
@@ -27,10 +29,7 @@ class Game
     $this->debug = $debug;
     $this->ed = new EventDispatcher();
 
-    // example
-    $this->ed->addListener('game.start', function (Event $event) {
-      echo 'event!';
-    });
+    // example dispatch and delete listeners
     $this->ed->dispatch('game.start');
     $ls = $this->ed->getListeners('game.start');
     foreach ($ls as $listener) {
@@ -47,21 +46,21 @@ class Game
     $classNameB = __NAMESPACE__ . '\\Heroes\\' . $heroB;
 
     // TODO: in config
-    $pack = require('../decks/Demo.php');
+    $this->cardSet = require('../sets/Demo.php');
 
     $this->top = [
       'hero' => new $classNameB(),
-      'deck' => new Deck($deckB, $pack),
-      'hand' => new Hand(),
-      'minions' => new Minions(),
-      'gone' => new Gone(),
+      'deck' => new Deck($deckB, $this->cardSet),
+      'hand' => new Hand([]),
+      'minions' => new Minions([]),
+      'gone' => new Gone([]),
     ];
     $this->bottom = [
       'hero' => new $classNameA(),
-      'deck' => new Deck($deckA, $pack),
-      'hand' => new Hand(),
-      'minions' => new Minions(),
-      'gone' => new Gone(),
+      'deck' => new Deck($deckA, $this->cardSet),
+      'hand' => new Hand([]),
+      'minions' => new Minions([]),
+      'gone' => new Gone([]),
     ];
 
     // select side
@@ -74,8 +73,8 @@ class Game
     }
 
     // TODO: mulligan and coin
-    $this->fs['hand']->pushCard( $this->fs['deck']->pullCardRand(3) );
-    $this->es['hand']->pushCard( $this->es['deck']->pullCardRand(3) );
+    $this->fs['hand']->pushCards( $this->fs['deck']->pullCardRand(3) );
+    $this->es['hand']->pushCards( $this->es['deck']->pullCardRand(3) );
   }
 
   private function switchSide()
@@ -101,15 +100,21 @@ class Game
 
     // play card
     if( isset($command['hand']) ) {
+      // TODO: check use conditions
       $target = $this->getTarget($command);
-      $card = $this->fs['hand']->get($command['hand']);
+      $card = $this->fs['hand']->pullCard($command['hand']);
       $this->result[] = $card->play($this, $target);
     }
 
     // end turn
     if( isset($command['end']) ) {
       $this->switchSide();
+      $this->fs['hand']->pushCards( $this->fs['deck']->pullCardRand(1) );
+      // TODO: corpse garbadge collector >=)
+
       $this->result[] = 'end';
+      // debug
+      $this->printState();
     }
 
     return $this->result;
@@ -133,11 +138,11 @@ class Game
     }
     // Card
     if (isset($command['fMinion'])) {
-      return $this->fs['minions']->getByIndex($command['fMinion']);
+      return $this->fs['minions']->getByPosition($command['fMinion']);
     }
     // Card
     if (isset($command['eMinion'])) {
-      return $this->es['minions']->getByIndex($command['eMinion']);
+      return $this->es['minions']->getByPosition($command['eMinion']);
     }
 
     // Card Collection
@@ -147,5 +152,43 @@ class Game
 
     // null target
     return null;
+  }
+
+  public function createMinion($selector)
+  {
+    if (is_int($selector)) {
+      foreach ($this->cardSet as $card) {
+        if ($card['id'] == $selector) {
+          return new Card($card);
+        }
+      }
+    }
+    // TODO: other selectors
+  }
+
+  // debug
+  public function printState()
+  {
+    $state = [
+      'top' => [
+        'hero' => $this->top['hero']->getStats(),
+        'deck' => count($this->top['deck']->select()),
+        'hand' => count($this->top['hand']->select()),
+        'minions' => count($this->top['minions']->select()),
+        'gone' => count($this->top['gone']->select()),
+      ],
+      'bottom' => [
+        'hero' => $this->bottom['hero']->getStats(),
+        'deck' => count($this->bottom['deck']->select()),
+        'hand' => count($this->bottom['hand']->select()),
+        'minions' => count($this->bottom['minions']->select()),
+        'gone' => count($this->bottom['gone']->select()),
+      ]
+    ];
+    print_r($state['top']['hero'] . "\n");
+    print_r($state['top']['deck'].':'.$state['top']['hand'].':'.$state['top']['minions'].':'.$state['top']['gone'] . "\n");
+    print_r($state['bottom']['hero'] . "\n");
+    print_r($state['bottom']['deck'].':'.$state['bottom']['hand'].':'.$state['bottom']['minions'].':'.$state['bottom']['gone'] . "\n");
+    print_r("\n");
   }
 }

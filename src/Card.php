@@ -4,12 +4,13 @@ namespace Cardgame;
 
 class Card
 {
+  private $id;
   private $name;
 
-  private $cost;
+  private $cost = []; // [base, modificator]
   // only for minions
-  private $attack;
-  private $health;
+  private $attack = []; // [base, modificator]
+  private $health = []; // [base, modificator]
 
   private $class;
   private $rarity;
@@ -20,8 +21,12 @@ class Card
   private $effects = [];
   private $callback;
 
+  // setted if card in Hand or Minion Collection
+  private $position;
+
   function __construct(array $doc)
   {
+    $this->id = $doc['id'];
     $this->name = $doc['nm'];
     $this->cost = $doc['cs'];
     $this->attack = isset($doc['at']) ? $doc['at']:null;
@@ -35,7 +40,7 @@ class Card
     $this->callback = isset($doc['cb']) ? $doc['cb']:null;
   }
 
-  public function getInfo()
+  public function export()
   {
     return [
       'nm' => $this->name,
@@ -45,9 +50,63 @@ class Card
     ];
   }
 
-  public function play($game)
+  public function play($game, $target)
   {
     $cb = $this->callback;
-    return $cb($game);
+    return $cb($game, $this, $target);
+  }
+
+  public function modAttack($val)
+  {
+    $this->attack[1] += $val;
+  }
+  public function modHealth($val)
+  {
+    $this->health[1] += $val;
+  }
+
+  public function getPosition()
+  {
+    return $this->position;
+  }
+  public function setPosition($position)
+  {
+    $this->position = $position;
+  }
+
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+
+  public function getHP()
+  {
+    return $this->health[0] + $this->health[1];
+  }
+  public function getAttack()
+  {
+    return $this->attack[0] + $this->attack[1];
+  }
+
+  public function damage($point)
+  {
+    if ($this->health[1] > 0) {
+      $this->health[1] -= $point;
+      if ($this->health[1] < 0) {
+        $this->health[0] += $this->health[1];
+      }
+    } else {
+      $this->health[0] -= $point;
+    }
+  }
+
+  public function kill()
+  {
+    $this->health[0] = 0;
+    $this->health[1] = 0;
   }
 }

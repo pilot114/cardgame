@@ -4,10 +4,6 @@ namespace Cardgame\Heroes;
 
 class Hunter extends Hero
 {
-  function __construct()
-  {
-  }
-
   public function isPowerRequireTarget()
   {
     return false;
