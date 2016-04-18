@@ -73,7 +73,7 @@ class Game
     }
 
     // TODO: mulligan and coin
-    $this->fs['hand']->pushCards( $this->fs['deck']->pullCardRand(3) );
+    $this->fs['hand']->pushCards( $this->fs['deck']->pullCardRand(4) );
     $this->es['hand']->pushCards( $this->es['deck']->pullCardRand(3) );
   }
 
@@ -109,12 +109,13 @@ class Game
     // end turn
     if( isset($command['end']) ) {
       $this->switchSide();
-      $this->fs['hand']->pushCards( $this->fs['deck']->pullCardRand(1) );
-      // TODO: corpse garbadge collector >=)
-
+      // TODO: corpse GC >=)
       $this->result[] = 'end';
       // debug
       $this->printState();
+
+      // get card in start turn
+      $this->fs['hand']->pushCards( $this->fs['deck']->pullCardRand(1) );
     }
 
     return $this->result;
@@ -123,7 +124,7 @@ class Game
   public function state()
   {
     // send to client on create game and on reconnect
-    return 'game create/reconnect';
+    return ['game create/reconnect'];
   }
 
   private function getTarget($command)
@@ -150,8 +151,8 @@ class Game
       return $this->fs['minions']->setTargetPosition($command['position']);
     }
 
-    // null target
-    return null;
+    var_dump('undefined command');
+    die();
   }
 
   public function createMinion($selector)
@@ -187,8 +188,14 @@ class Game
     ];
     print_r($state['top']['hero'] . "\n");
     print_r($state['top']['deck'].':'.$state['top']['hand'].':'.$state['top']['minions'].':'.$state['top']['gone'] . "\n");
+    print_r($this->top['hand']->exportNames());
+    print_r($this->top['minions']->exportNames());
+    print_r("\n");
     print_r($state['bottom']['hero'] . "\n");
     print_r($state['bottom']['deck'].':'.$state['bottom']['hand'].':'.$state['bottom']['minions'].':'.$state['bottom']['gone'] . "\n");
+    print_r($this->bottom['hand']->exportNames());
+    print_r($this->bottom['minions']->exportNames());
+    print_r("\n");
     print_r("\n");
   }
 }

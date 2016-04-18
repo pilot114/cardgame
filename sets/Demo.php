@@ -15,11 +15,11 @@ return [
     'im' => true,
     'ih' => false,
     'cb' => function($game, $card, $target) {
-      $game->ed->addListener('play.friendlySpell', function (Event $event) use ($card. $game) {
+      $game->ed->addListener('play.friendlySpell', function (Event $event) use ($card, $game) {
         $card->modAttack(1);
         $game->result[] = 'inc attack for ' . $card->getPosition() . ' friendly';
       });
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -35,7 +35,7 @@ return [
       $game->fs['minions']->pushMinion($card);
       $game->fs['minions']->pushMinion($card);
       $game->result[] = 'summon 2 minion ' . $card->getId();
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -59,7 +59,7 @@ return [
           $minion->damage(1);
         }
       }
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -73,7 +73,7 @@ return [
     'cb' => function($game, $card, $target){
       $this->fs['hand']->pushCards( $this->fs['deck']->pullCardRand(2) );
       $game->result[] = 'get to 2 card!';
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -88,7 +88,7 @@ return [
       echo get_class($target);
       $target->damage(6);
       $game->result[] = '6 point damage!';
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -103,7 +103,7 @@ return [
       echo get_class($target);
       $target->damage(2);
       $game->result[] = '2 point damage!';
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -130,7 +130,7 @@ return [
           }
         }
       });
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -150,7 +150,7 @@ return [
         $game->fs['hero']->damage(2);
         $game->result[] = 'secret: damage 2 points all friendly character';
       });
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -169,7 +169,7 @@ return [
         $card->modAttack(2);
         $card->modHealth(1);
       });
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -184,12 +184,13 @@ return [
       $enemyesCount = count($game->es['minions']->select());
       if ($enemyesCount == 0) {
         // TODO: impossible action!
+        return;
       }
       $targetPosition = mt_rand(1, $enemyesCount);
       $minion = $game->es['minions']->getByPosition($targetPosition);
       $minion->kill();
       $game->result[] = 'kill ' . $targetPosition . ' enemy minion';
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -209,7 +210,7 @@ return [
           $game->result[] = 'summon minion: ' . $card->getId();
         }
       });
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -223,7 +224,7 @@ return [
     'im' => true,
     'ih' => false,
     'cb' => function($game, $card, $target){
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -237,7 +238,7 @@ return [
     'im' => true,
     'ih' => false,
     'cb' => function($game, $card, $target){
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -251,7 +252,7 @@ return [
     'im' => true,
     'ih' => false,
     'cb' => function($game, $card, $target){
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -266,7 +267,7 @@ return [
     'im' => true,
     'ih' => false,
     'cb' => function($game, $card, $target){
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -280,7 +281,7 @@ return [
     'im' => true,
     'ih' => false,
     'cb' => function($game, $card, $target){
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -297,7 +298,7 @@ return [
       // doubleTarget!
       $target[1]->silence();
       $game->result[] = 'silense minion: ' . $target[1]->getId();
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -319,7 +320,7 @@ return [
           $game->result[] = 'spell damage dec';
         }
       });
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -333,7 +334,7 @@ return [
     'im' => true,
     'ih' => true,
     'cb' => function($game, $card, $target){
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
   [
@@ -347,7 +348,7 @@ return [
     'im' => true,
     'ih' => true,
     'cb' => function($game, $card, $target){
-      return $card->getId() . ' played';
+      return $card->getName() . ' played';
     }
   ],
 ];

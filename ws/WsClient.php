@@ -21,7 +21,10 @@ class WsClient
           }
 
           $conn->on('message', function($msg) use ($conn) {
-            echo $msg . "\n";
+            $results = json_decode($msg, true);
+            foreach ($results as $result) {
+              echo $result . "\n";
+            }
           });
           $conn->on('close', function($code, $reason) {
             echo "Connect close. Code: $code, Reason: $reason\n";

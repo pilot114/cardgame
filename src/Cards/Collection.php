@@ -2,7 +2,7 @@
 
 namespace Cardgame\Cards;
 
-class Collection implements Iterator
+class Collection implements \Iterator
 {
   protected $cards;
   protected $position = 0;
@@ -28,6 +28,15 @@ class Collection implements Iterator
       $info[] = $card->export();
     }
     return $info;
+  }
+
+  public function exportNames()
+  {
+    $info = '';
+    foreach ($this->cards as $card) {
+      $info .= ' * ' .$card->getName();
+    }
+    return $info . "\n";
   }
 
 

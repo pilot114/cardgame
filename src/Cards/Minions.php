@@ -5,10 +5,13 @@ namespace Cardgame\Cards;
 class Minions extends Collection
 {
   private $targetPosition = 1;
+
   public function setTargetPosition($position)
   {
     $this->targetPosition = $position;
+    return $this;
   }
+
   public function getTargetPosition()
   {
     return $this->targetPosition;

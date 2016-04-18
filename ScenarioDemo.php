@@ -31,4 +31,4 @@ $scenario = [
   // ['end' => true],
 ];
 // loop
-$wc = new WsClient(['Hunter' => $deckA, 'Mage' => $deckB], $scenario);
+$wc = new WsClient(['Mage' => $deckA, 'Hunter' => $deckB], $scenario);

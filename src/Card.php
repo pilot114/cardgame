@@ -78,9 +78,10 @@ class Card
   {
     return $this->id;
   }
-  public function setId($id)
+
+  public function getName()
   {
-    $this->id = $id;
+    return $this->name;
   }
 
   public function getHP()

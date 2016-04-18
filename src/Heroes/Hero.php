@@ -42,7 +42,10 @@ class Hero
 
   public function getStats()
   {
-    return get_class($this) . ' HP: ' . $this->health . ' ARMOR: ' . $this->armor . ' ATTACK: ' . $this->attack;
+    return end(explode('\\', get_class($this)))
+    . ' HP: ' . $this->health
+    . ' ARMOR: ' . $this->armor
+    . ' ATTACK: ' . $this->attack;
   }
 
   public function modSpellDamage($point)
