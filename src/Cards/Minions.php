@@ -9,19 +9,10 @@ class Minions extends Collection
   public function setTargetPosition($position)
   {
     $this->targetPosition = $position;
-    return $this;
   }
-
-  public function getTargetPosition()
-  {
-    return $this->targetPosition;
-  }
-
 
   public function getByPosition($position)
   {
-    var_dump(array_keys($this->cards));
-    die();
     $this->cards[$position-1];
   }
 

@@ -85,7 +85,6 @@ return [
     'im' => false,
     'ih' => false,
     'cb' => function($game, $card, $target){
-      echo get_class($target);
       $target->damage(6);
       $game->result[] = '6 point damage!';
       return $card->getName() . ' played';
@@ -100,7 +99,6 @@ return [
     'im' => false,
     'ih' => false,
     'cb' => function($game, $card, $target){
-      echo get_class($target);
       $target->damage(2);
       $game->result[] = '2 point damage!';
       return $card->getName() . ' played';

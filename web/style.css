@@ -1,0 +1,73 @@
+.game_board {
+  width: 1200px;
+  height: 720px;
+  background: url("assets/gb_1.jpg");
+  background-size: cover;
+}
+.end_turn {
+  width: 100px;
+  height: 40px;
+  background: yellow;
+  position: absolute;
+  top: 315px;
+  left: 985px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 40px;
+  cursor: pointer;
+}
+
+/* hero B  */
+.hero_B {
+  width: 140px;
+  height: 155px;
+  background: url("assets/hant.png");
+  background-size: cover;
+  position: absolute;
+  top: 60px;
+  left: 570px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 40px;
+  cursor: pointer;
+}
+.power_B {
+  width: 120px;
+  height: 100px;
+  background: url("assets/hant_p.png");
+  background-size: cover;
+  position: absolute;
+  top: 100px;
+  left: 720px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 40px;
+  cursor: pointer;
+}
+/* hero A  */
+.hero_A {
+  width: 140px;
+  height: 155px;
+  background: url("assets/mag.png");
+  background-size: cover;
+  position: absolute;
+  top: 470px;
+  left: 570px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 40px;
+  cursor: pointer;
+}
+.power_A {
+  width: 120px;
+  height: 100px;
+  background: url("assets/mag_p.png");
+  background-size: cover;
+  position: absolute;
+  top: 500px;
+  left: 720px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 40px;
+  cursor: pointer;
+}

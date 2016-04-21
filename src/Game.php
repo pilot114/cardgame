@@ -37,7 +37,6 @@ class Game
     }
     $this->ed->dispatch('game.start');
 
-
     list($heroA, $heroB) = array_keys($createMsg);
     $deckA = $createMsg[$heroA];
     $deckB = $createMsg[$heroB];
@@ -101,8 +100,13 @@ class Game
     // play card
     if( isset($command['hand']) ) {
       // TODO: check use conditions
-      $target = $this->getTarget($command);
+
       $card = $this->fs['hand']->pullCard($command['hand']);
+      // target in Hero, Minion or int position
+      $target = $this->getTarget($command, $card);
+      if ($card->isMinion) {
+        $this->fs['minions']->setMinion($card, $target);
+      }
       $this->result[] = $card->play($this, $target);
     }
 
@@ -127,7 +131,7 @@ class Game
     return ['game create/reconnect'];
   }
 
-  private function getTarget($command)
+  private function getTarget($command, $card)
   {
     // Hero
     if (isset($command['self'])) {
@@ -146,9 +150,9 @@ class Game
       return $this->es['minions']->getByPosition($command['eMinion']);
     }
 
-    // Card Collection
+    // int (always minion!)
     if (isset($command['position'])) {
-      return $this->fs['minions']->setTargetPosition($command['position']);
+        return $command['position'];
     }
 
     var_dump('undefined command');
