@@ -31,6 +31,17 @@
   line-height: 40px;
   cursor: pointer;
 }
+.hero_B_hp {
+  width: 30px;
+  height: 30px;
+  background: yellow;
+  position: absolute;
+  top: 180px;
+  left: 680px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 30px;
+}
 .power_B {
   width: 120px;
   height: 100px;
@@ -43,6 +54,28 @@
   vertical-align: middle;
   line-height: 40px;
   cursor: pointer;
+}
+.mana_B {
+  width: 30px;
+  height: 30px;
+  background: yellow;
+  position: absolute;
+  top: 40px;
+  left: 800px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 30px;
+}
+.deck_B {
+  width: 30px;
+  height: 30px;
+  background: yellow;
+  position: absolute;
+  top: 240px;
+  left: 1120px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 30px;
 }
 /* hero A  */
 .hero_A {
@@ -58,6 +91,17 @@
   line-height: 40px;
   cursor: pointer;
 }
+.hero_A_hp {
+  width: 30px;
+  height: 30px;
+  background: yellow;
+  position: absolute;
+  top: 590px;
+  left: 680px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 30px;
+}
 .power_A {
   width: 120px;
   height: 100px;
@@ -70,4 +114,26 @@
   vertical-align: middle;
   line-height: 40px;
   cursor: pointer;
+}
+.mana_A {
+  width: 30px;
+  height: 30px;
+  background: yellow;
+  position: absolute;
+  top: 655px;
+  left: 825px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 30px;
+}
+.deck_A {
+  width: 30px;
+  height: 30px;
+  background: yellow;
+  position: absolute;
+  top: 400px;
+  left: 1120px;
+  text-align:center;
+  vertical-align: middle;
+  line-height: 30px;
 }
